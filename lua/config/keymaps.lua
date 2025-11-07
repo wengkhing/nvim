@@ -18,3 +18,12 @@ vim.keymap.set("n", "<C-w><Down>", "<C-w>j", { desc = "Move to window below" })
 vim.keymap.set("n", "<C-w><Left>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-w><Right>", "<C-w>l", { desc = "Move to right window" })
 vim.keymap.set("n", "<leader><space>", LazyVim.pick("files", { root = false }), { desc = "Find Files (cwd)" })
+
+--Require the new module
+local colemak = require("config.colemak_toggle")
+
+-- Add your new toggle shortcut
+vim.keymap.set("n", "<leader>at", colemak.toggle_layout, { desc = "Toggle Colemak-DHm Layout On/Off" })
+
+-- You can also optionally start in Colemak mode by calling the function here:
+-- colemak.toggle_layout()

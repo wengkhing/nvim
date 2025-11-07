@@ -3,7 +3,7 @@
 -- end
 
 return {
-  "echasnovski/mini.files",
+  "nvim-mini/mini.files",
   config = function()
     require("mini.files").setup({
       windows = {

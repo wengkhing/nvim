@@ -6,3 +6,6 @@ vim.g.root_spec = { { "package.json" }, "cwd" }
 
 -- Enable this option to avoid conflicts with Prettier.
 vim.g.lazyvim_prettier_needs_config = true
+
+-- Set default shell to bash
+vim.o.shell = 'bash -l'
