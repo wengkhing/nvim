@@ -2,15 +2,33 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- Custom shortcut for Biome Check & Fix
 vim.keymap.set("n", "<leader>af", function()
-  vim.cmd("!biome check --apply " .. vim.fn.expand("%"))
-  -- vim.cmd("e!") -- Reload file
-end, { desc = "Biome: Format and fix file" })
+  local biome = LazyVim.root() .. "/node_modules/.bin/biome"
+  if vim.fn.filereadable(biome) == 0 then
+    vim.notify("Biome is not installed in this project", vim.log.levels.WARN)
+    return
+  end
+  vim.cmd("silent write")
+  local output = vim.fn.system({ biome, "check", "--write", vim.api.nvim_buf_get_name(0) })
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Biome check failed:\n" .. output, vim.log.levels.ERROR)
+  end
+  vim.cmd("edit")
+end, { desc = "Biome Check & Fix" })
 
 -- Toggle code companion
 vim.keymap.set("n", "<leader>ac", function()
   require("codecompanion").toggle()
 end, { desc = "CodeCompanion: Chat Toggle" })
+
+-- GitUI (replaces lazygit)
+vim.keymap.set("n", "<leader>gg", function()
+  Snacks.terminal("gitui", { cwd = LazyVim.root() })
+end, { desc = "GitUI (Root Dir)" })
+vim.keymap.set("n", "<leader>gG", function()
+  Snacks.terminal("gitui")
+end, { desc = "GitUI (cwd)" })
 
 -- Arrow key window navigation
 vim.keymap.set("n", "<C-w><Up>", "<C-w>k", { desc = "Move to window above" })

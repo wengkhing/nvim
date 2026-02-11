@@ -8,3 +8,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end,
 })
+
+vim.g.autoformat = false
+
+vim.lsp.enable('biome')

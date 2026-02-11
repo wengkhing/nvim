@@ -121,6 +121,7 @@ return {
       exclude = {
         ".git",
         "node_modules",
+        "build",
         ".sst",
         ".next",
         ".svelte-kit",

@@ -9,3 +9,4 @@ vim.g.lazyvim_prettier_needs_config = true
 
 -- Set default shell to bash
 vim.o.shell = 'bash -l'
+
